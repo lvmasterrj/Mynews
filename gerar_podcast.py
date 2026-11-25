@@ -52,7 +52,7 @@ log = logging.getLogger("podcast")
 TZ = ZoneInfo("America/Sao_Paulo")
 UA = "Mozilla/5.0 (compatible; PodcastDiarioPessoal/1.0)"
 # Testados em ordem: o Google aposenta modelos com frequência (o 2.5 já saiu para contas novas).
-MODELOS_PADRAO = ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite",
+MODELOS_PADRAO = ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-3.8-flash",
                   "gemini-2.5-flash-lite"]
 ITUNES = "http://www.itunes.com/dtds/podcast-1.0.dtd"
 ATOM = "http://www.w3.org/2005/Atom"
@@ -73,7 +73,7 @@ PADROES = {
     "genero_voz": "masculino",
     "max_materias_por_tema": 6,
     "max_por_fonte": 3,
-    "pausa_entre_chamadas_s": 6,
+    "pausa_entre_chamadas_s": 12,
     "sobre_o_ouvinte": "",
 }
 
@@ -295,10 +295,21 @@ def enriquecer(itens: list[dict]) -> None:
 # ------------------------------------------------------------------- Gemini
 
 class ModeloIndisponivel(RuntimeError):
-    """O modelo não existe, foi aposentado ou não tem cota gratuita para esta chave."""
+    """O modelo não existe, foi aposentado ou não tem cota gratuita para esta chave (permanente)."""
 
 
-def gemini(prompt: str, sistema: str, modelo: str, chave: str, tentativas: int = 5) -> str:
+class ModeloSobrecarregado(RuntimeError):
+    """O modelo está congestionado ou no limite de uso agora (temporário)."""
+
+
+def _motivo(r: requests.Response) -> str:
+    try:
+        return str(r.json()["error"]["message"])[:140].replace("\n", " ")
+    except Exception:
+        return r.text[:140].replace("\n", " ")
+
+
+def gemini(prompt: str, sistema: str, modelo: str, chave: str, tentativas: int = 2) -> str:
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent"
     corpo = {
         "systemInstruction": {"parts": [{"text": sistema}]},
@@ -306,19 +317,22 @@ def gemini(prompt: str, sistema: str, modelo: str, chave: str, tentativas: int =
         "generationConfig": {"temperature": 0.8, "maxOutputTokens": 8192},
     }
     ultimo_erro = ""
+    transitorio = False
     for i in range(tentativas):
         r = requests.post(url, headers={"x-goog-api-key": chave, "Content-Type": "application/json"},
                           json=corpo, timeout=180)
         if r.status_code == 404 or (r.status_code == 429 and "limit: 0" in r.text):
-            raise ModeloIndisponivel(f"{modelo}: HTTP {r.status_code}: {r.text[:160]}")
+            raise ModeloIndisponivel(f"{modelo}: HTTP {r.status_code}: {_motivo(r)}")
         if r.status_code in (429, 500, 503):
-            espera = min(60, 5 * 2 ** i)
-            ultimo_erro = f"HTTP {r.status_code}"
-            log.warning("  Gemini respondeu %s; nova tentativa em %ss", r.status_code, espera)
-            time.sleep(espera)
+            transitorio = True
+            ultimo_erro = f"HTTP {r.status_code}: {_motivo(r)}"
+            log.warning("  %s respondeu %s (%s)", modelo, r.status_code, _motivo(r))
+            if i < tentativas - 1:
+                time.sleep(8 * (i + 1))
             continue
         if not r.ok:
             raise RuntimeError(f"Gemini HTTP {r.status_code}: {r.text[:300]}")
+        transitorio = False
         dados = r.json()
         try:
             partes = dados["candidates"][0]["content"]["parts"]
@@ -329,21 +343,36 @@ def gemini(prompt: str, sistema: str, modelo: str, chave: str, tentativas: int =
             return texto
         ultimo_erro = f"resposta vazia: {str(dados)[:200]}"
         time.sleep(3)
+    if transitorio:
+        raise ModeloSobrecarregado(f"{modelo}: {ultimo_erro}")
     raise RuntimeError(f"Gemini falhou após {tentativas} tentativas ({ultimo_erro})")
 
 
-def gemini_com_fallback(prompt: str, sis: str, modelos: list[str], chave: str) -> str:
-    """Usa o primeiro modelo da lista; se ele estiver indisponível, descarta e tenta o próximo."""
-    while modelos:
-        try:
-            return gemini(prompt, sis, modelos[0], chave)
-        except ModeloIndisponivel as e:
-            log.warning("  modelo indisponível (%s)", e)
-            modelos.pop(0)
-            if modelos:
-                log.warning("  tentando %s", modelos[0])
-    raise RuntimeError("nenhum modelo Gemini disponível; defina GEMINI_MODEL com um modelo Flash "
-                       "que tenha plano gratuito (veja ai.google.dev/gemini-api/docs/pricing)")
+def gemini_com_fallback(prompt: str, sis: str, modelos: list[str], chave: str, rodadas: int = 3) -> str:
+    """Tenta os modelos em ordem. Modelo inexistente é descartado; modelo congestionado só passa
+    a vez. O modelo que funcionou vai para o início da lista e é reaproveitado nas próximas chamadas."""
+    for rodada in range(rodadas):
+        for modelo in list(modelos):
+            try:
+                texto = gemini(prompt, sis, modelo, chave)
+            except ModeloIndisponivel as e:
+                log.warning("  modelo descartado (%s)", e)
+                modelos.remove(modelo)
+                continue
+            except ModeloSobrecarregado:
+                log.warning("  %s congestionado; tentando o próximo modelo", modelo)
+                continue
+            if modelos[0] != modelo:
+                modelos.remove(modelo)
+                modelos.insert(0, modelo)
+            return texto
+        if not modelos:
+            break
+        if rodada < rodadas - 1:
+            log.warning("  todos os modelos ocupados; aguardando 45s para tentar de novo")
+            time.sleep(45)
+    raise RuntimeError("nenhum modelo Gemini respondeu (indisponíveis ou congestionados); tente mais tarde "
+                       "ou defina GEMINI_MODEL (modelos com plano gratuito: ai.google.dev/gemini-api/docs/pricing)")
 
 
 def sistema(cfg: dict) -> str:
@@ -547,14 +576,19 @@ def processar_perfil(caminho: Path, args, chave: str, modelos: list[str], base_u
     estado = ler_estado(pasta)
     vistos: dict = estado["vistos"]
     guid_hoje = f"{cfg['slug']}-{hoje:%Y%m%d}"
-    if not args.refazer and not args.so_roteiro and any(e["guid"] == guid_hoje for e in estado["episodios"]):
+    existente = next((e for e in estado["episodios"] if e["guid"] == guid_hoje), None)
+    curto = existente is not None and existente["segundos"] < cfg["duracao_minutos"] * 60 * 0.5
+    refazer = args.refazer or curto
+    if curto:
+        log.warning("O episódio de hoje ficou curto (%d min); vou refazê-lo.", existente["segundos"] // 60)
+    if existente and not refazer and not args.so_roteiro:
         log.info("O episódio de hoje já existe; nada a fazer (use --refazer para substituí-lo).")
         return
 
     # 1) coleta
     coletas: list[tuple[dict, list[dict]]] = []
     feeds_ok = 0
-    ja_usadas = {} if args.refazer else vistos
+    ja_usadas = {} if refazer else vistos
     for tema in cfg["temas"]:
         log.info("Coletando: %s", tema["nome"])
         itens, ok = coletar_tema(tema, cfg, ja_usadas)
@@ -596,6 +630,10 @@ def processar_perfil(caminho: Path, args, chave: str, modelos: list[str], base_u
     roteiro = "\n\n".join([intro, *blocos, outro])
     total = contar_palavras(roteiro)
     log.info("Roteiro pronto: %d palavras (~%.0f min)", total, total / cfg["palavras_por_minuto"])
+    minimo = cfg["duracao_minutos"] * cfg["palavras_por_minuto"] * 0.5
+    if total < minimo and not args.so_roteiro:
+        raise RuntimeError(f"roteiro curto demais ({total} palavras; mínimo {int(minimo)}): "
+                           "episódio não publicado. Provavelmente o Gemini está congestionado; tente mais tarde.")
 
     if args.so_roteiro:
         rascunhos = Path("rascunhos")

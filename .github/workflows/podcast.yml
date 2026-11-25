@@ -20,7 +20,7 @@ concurrency:
 jobs:
   gerar:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     env:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
