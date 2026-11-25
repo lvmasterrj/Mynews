@@ -2,7 +2,7 @@
 #  PERFIL DO LEO  -  edite à vontade; o próximo episódio já usa as mudanças
 # =====================================================================
 nome: Leo                          # como o apresentador te chama
-slug: leo-troque-este-codigo       # vira parte da URL do feed. TROQUE por algo aleatório (ex.: leo-k7x2p9qm)
+slug: leo-2xk0na98                  # vira parte da URL do feed; mantenha aleatório
 titulo_podcast: Resumo da Manhã do Leo
 voz: pt-BR-AntonioNeural           # outra opção: pt-BR-FranciscaNeural (lista: edge-tts --list-voices)
 genero_voz: masculino              # masculino | feminino (ajusta como o apresentador fala de si)

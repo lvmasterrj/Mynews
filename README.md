@@ -23,9 +23,9 @@ feeds RSS -> texto das matérias -> Gemini escreve o roteiro -> edge-tts gera a 
 2. **Pegue uma chave do Gemini**: https://aistudio.google.com/apikey (grátis).
 3. **Guarde a chave como segredo**: no repositório, *Settings > Secrets and variables > Actions >
    New repository secret*. Nome: `GEMINI_API_KEY`. Valor: a chave.
-4. **Troque o `slug`** em `config/leo.yaml` e `config/esposa.yaml` por algo aleatório
-   (ex.: `leo-k7x2p9qm`). Ele vira parte do endereço do feed, que fica "não listado".
-   Ajuste também o nome e os temas da sua esposa.
+4. **O `slug`** de `config/leo.yaml` e `config/lu.yaml` já é um código aleatório. Ele vira parte
+   do endereço do feed, que fica "não listado"; só troque se quiser outro.
+   Ajuste os temas da Lu em `config/lu.yaml`.
 5. **Rode a primeira vez na mão**: aba *Actions > Podcast diário > Run workflow*.
    Leva uns 10 a 15 minutos. Ao final, o branch `gh-pages` é criado.
 6. **Ative o Pages**: *Settings > Pages > Build and deployment > Deploy from a branch >
@@ -41,7 +41,7 @@ Depois disso o episódio é gerado todo dia às 04:30 (Brasília), e fica pronto
 endereço RSS* e cole o link do feed. Nas configurações do podcast, ative o download automático.
 Funciona no Android Auto.
 
-**iPhone (esposa)** - Apple Podcasts: aba *Biblioteca* > menu **...** > *Seguir um programa por
+**iPhone (Lu)** - Apple Podcasts: aba *Biblioteca* > menu **...** > *Seguir um programa por
 URL* (o texto exato pode variar conforme a versão do iOS) e cole o link. Nas configurações do
 programa, deixe o download automático de novos episódios ligado. Funciona no CarPlay.
 

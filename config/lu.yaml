@@ -1,9 +1,9 @@
 # =====================================================================
-#  PERFIL DA ESPOSA  -  os temas abaixo são só um ponto de partida.
+#  PERFIL DA LU  -  os temas abaixo são só um ponto de partida.
 #  Troque pelos interesses dela (veja os comentários em leo.yaml).
 # =====================================================================
-nome: Seu nome aqui                # como o apresentador chama ela (ex.: Maria)
-slug: esposa-troque-este-codigo    # vira parte da URL do feed. TROQUE por algo aleatório (ex.: maria-q4w8z1nc)
+nome: Lu                           # como o apresentador chama ela
+slug: lu-kjm8kok1                   # vira parte da URL do feed; mantenha aleatório
 titulo_podcast: Resumo da Manhã
 voz: pt-BR-FranciscaNeural         # outra opção: pt-BR-AntonioNeural
 genero_voz: feminino
