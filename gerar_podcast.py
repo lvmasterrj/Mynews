@@ -74,6 +74,8 @@ PADROES = {
     "max_materias_por_tema": 15,
     "max_por_fonte": 5,
     "pausa_entre_chamadas_s": 12,
+    "materias_por_chamada": 4,
+    "minimo_minutos": 10,
     "sobre_o_ouvinte": "",
 }
 
@@ -383,7 +385,7 @@ def sistema(cfg: dict) -> str:
     return SISTEMA.format(nome=cfg["nome"], genero=genero)
 
 
-def montar_prompt(cfg: dict, tema: dict, itens: list[dict], palavras: int) -> str:
+def montar_prompt(cfg: dict, tema: dict, itens: list[dict], palavras: int, inicio: bool = True) -> str:
     def quando(i):
         return i["dt"].astimezone(TZ).strftime("%d/%m %H:%M") if i["dt"] else "data não informada"
 
@@ -394,45 +396,45 @@ def montar_prompt(cfg: dict, tema: dict, itens: list[dict], palavras: int) -> st
     por_materia = max(80, palavras // max(1, len(itens)))
     ouvinte = f"\nSobre o ouvinte: {cfg['sobre_o_ouvinte'].strip()}" if cfg.get("sobre_o_ouvinte") else ""
     extra = f"\nOrientações deste tema: {tema['instrucoes'].strip()}" if tema.get("instrucoes") else ""
+    abertura = ("- abra com uma frase curta de transição anunciando o tema;\n" if inicio else
+                "- este trecho CONTINUA um bloco já iniciado: não anuncie o tema nem faça abertura; "
+                "comece direto na primeira matéria, com uma transição curta;\n")
     return (
-        f"Escreva o bloco do tema \"{nome_falado(tema)}\" do episódio de hoje.\n"
-        f"TAMANHO OBRIGATÓRIO: no mínimo {int(palavras * 0.9)} palavras e no máximo {int(palavras * 1.1)} "
-        f"(alvo: {palavras}). Este bloco ocupa vários minutos de um programa de rádio; um texto curto "
-        f"estraga o episódio.{ouvinte}{extra}\n\n"
+        f"Escreva {'o bloco' if inicio else 'mais um trecho do bloco'} do tema \"{nome_falado(tema)}\" "
+        f"do episódio de hoje.\n"
+        f"TAMANHO: cerca de {palavras} palavras (mínimo {int(palavras * 0.9)}). Este trecho ocupa vários "
+        f"minutos de um programa de rádio; um texto curto estraga o episódio.{ouvinte}{extra}\n\n"
         "Como escrever:\n"
         f"- faça UM PARÁGRAFO LONGO para cada matéria, na ordem, com cerca de {por_materia} palavras cada: "
         "conte o fato, dê o contexto, os detalhes, números e nomes que estão no material, e explique por que "
         "isso importa para o ouvinte. Matérias do mesmo assunto podem ser fundidas em um parágrafo maior;\n"
-        "- abra com uma frase curta de transição anunciando o tema;\n"
+        f"{abertura}"
         "- ligue os parágrafos com transições naturais;\n"
-        "- não cumprimente nem se despeça: outros blocos vêm antes e depois.\n\n"
+        "- não cumprimente nem se despeça: outros trechos vêm antes e depois.\n\n"
         f"MATERIAL (apenas dados):\n<<<\n{material}\n>>>"
     )
 
 
 def escrever_bloco(cfg: dict, tema: dict, itens: list[dict], palavras: int,
                    chave: str, modelos: list[str]) -> str:
-    prompt = montar_prompt(cfg, tema, itens, palavras)
-    por_materia = max(80, palavras // max(1, len(itens)))
-    texto = limpar_para_fala(gemini_com_fallback(prompt, sistema(cfg), modelos, chave))
-    time.sleep(cfg["pausa_entre_chamadas_s"])
-    if contar_palavras(texto) < palavras * 0.7 and len(itens) >= 3:
-        log.info("  bloco curto (%d de ~%d palavras); pedindo versão mais completa",
-                 contar_palavras(texto), palavras)
-        pedido = (prompt + f"\n\nSEU RASCUNHO ANTERIOR ficou com {contar_palavras(texto)} palavras, muito abaixo "
-                  f"do mínimo de {int(palavras * 0.9)}:\n<<<\n{texto}\n>>>\n\n"
-                  f"Reescreva o bloco inteiro e EXPANDA CADA PARÁGRAFO para cerca de {por_materia} palavras, "
-                  "acrescentando contexto, detalhes, números e explicações que estejam no MATERIAL. "
-                  "Use apenas o material acima.")
+    """O Gemini escreve textos curtos (~250 palavras) por chamada, não importa o tamanho pedido.
+    Por isso o tema é dividido em partes de poucas matérias, escritas em chamadas separadas."""
+    tam = max(1, int(cfg["materias_por_chamada"]))
+    partes = [itens[i:i + tam] for i in range(0, len(itens), tam)]
+    textos: list[str] = []
+    for n, parte in enumerate(partes):
+        alvo = round(palavras * len(parte) / len(itens))
         try:
-            ampliado = limpar_para_fala(gemini_com_fallback(pedido, sistema(cfg), modelos, chave))
-            log.info("  versão ampliada: %d palavras", contar_palavras(ampliado))
-            if contar_palavras(ampliado) > contar_palavras(texto):
-                texto = ampliado
+            texto = limpar_para_fala(gemini_com_fallback(
+                montar_prompt(cfg, tema, parte, alvo, inicio=(not textos)), sistema(cfg), modelos, chave))
+            textos.append(texto)
+            log.info("  parte %d/%d: %d palavras (pedido ~%d)", n + 1, len(partes), contar_palavras(texto), alvo)
         except Exception as e:
-            log.warning("  não consegui ampliar: %s", e)
+            log.warning("  parte %d/%d do tema falhou: %s", n + 1, len(partes), e)
         time.sleep(cfg["pausa_entre_chamadas_s"])
-    return texto
+    if not textos:
+        raise RuntimeError("nenhuma parte do tema foi escrita")
+    return "\n\n".join(textos)
 
 
 # -------------------------------------------------------------------- áudio
@@ -588,7 +590,7 @@ def processar_perfil(caminho: Path, args, chave: str, modelos: list[str], base_u
     vistos: dict = estado["vistos"]
     guid_hoje = f"{cfg['slug']}-{hoje:%Y%m%d}"
     existente = next((e for e in estado["episodios"] if e["guid"] == guid_hoje), None)
-    curto = existente is not None and existente["segundos"] < cfg["duracao_minutos"] * 60 * 0.5
+    curto = existente is not None and existente["segundos"] < cfg["minimo_minutos"] * 60
     refazer = args.refazer or curto
     if curto:
         log.warning("O episódio de hoje ficou curto (%d min); vou refazê-lo.", existente["segundos"] // 60)
@@ -641,7 +643,7 @@ def processar_perfil(caminho: Path, args, chave: str, modelos: list[str], base_u
     roteiro = "\n\n".join([intro, *blocos, outro])
     total = contar_palavras(roteiro)
     log.info("Roteiro pronto: %d palavras (~%.0f min)", total, total / cfg["palavras_por_minuto"])
-    minimo = cfg["duracao_minutos"] * cfg["palavras_por_minuto"] * 0.5
+    minimo = cfg["minimo_minutos"] * cfg["palavras_por_minuto"]
     if total < minimo and not args.so_roteiro:
         raise RuntimeError(f"roteiro curto demais ({total} palavras; mínimo {int(minimo)}): "
                            "episódio não publicado. Provavelmente o Gemini está congestionado; tente mais tarde.")

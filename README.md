@@ -94,7 +94,7 @@ sobras de notícias). Use `--refazer` para substituí-lo, por exemplo depois de 
   variável `GEMINI_MODEL` (no workflow, em `env:`) com um modelo Flash que tenha plano gratuito,
   conforme https://ai.google.dev/gemini-api/docs/pricing.
 - **Gemini retorna 503 (sobrecarregado) ou 429**: o script troca de modelo sozinho, espera e tenta
-  de novo. Se o roteiro ficar com menos da metade do tamanho pedido, o episódio **não é publicado**
+  de novo. Se o episódio ficar abaixo de `minimo_minutos` (10 por padrão), ele **não é publicado**
   e o job fica vermelho. Se já existir um episódio curto de hoje, a próxima execução o refaz.
 - **Gemini retorna 429**: limite do plano gratuito. O script espera e tenta de novo; se persistir,
   aumente `pausa_entre_chamadas_s` no perfil ou reduza o número de temas.
