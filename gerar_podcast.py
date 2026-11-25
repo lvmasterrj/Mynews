@@ -71,8 +71,8 @@ PADROES = {
     "manter_episodios": 7,
     "velocidade": "+0%",
     "genero_voz": "masculino",
-    "max_materias_por_tema": 10,
-    "max_por_fonte": 4,
+    "max_materias_por_tema": 15,
+    "max_por_fonte": 5,
     "pausa_entre_chamadas_s": 12,
     "sobre_o_ouvinte": "",
 }
@@ -220,6 +220,8 @@ def coletar_tema(tema: dict, cfg: dict, vistos: dict) -> tuple[list[dict], int]:
     padroes = [padrao_termo(k) for k in tema.get("palavras_chave", [])]
     excluir = [padrao_termo(k) for k in tema.get("excluir", [])]
     exigir = bool(tema.get("somente_com_palavra_chave")) and bool(padroes)
+    maximo = int(tema.get("max_materias", cfg["max_materias_por_tema"]))
+    por_fonte_max = int(tema.get("max_por_fonte", cfg["max_por_fonte"]))
 
     por_fonte: list[list[dict]] = []
     feeds_ok = 0
@@ -254,15 +256,15 @@ def coletar_tema(tema: dict, cfg: dict, vistos: dict) -> tuple[list[dict], int]:
             candidatas.append({"titulo": titulo, "link": link, "fonte": fonte,
                                "resumo": resumo, "dt": dt, "chave": chave, "pontos": pontos})
         candidatas.sort(key=lambda i: (i["pontos"], i["dt"] or limite), reverse=True)
-        por_fonte.append(candidatas[: cfg["max_por_fonte"]])
+        por_fonte.append(candidatas[: por_fonte_max])
 
     # intercala as fontes para nenhuma dominar o tema
     escolhidas: list[dict] = []
     titulos_vistos: set[str] = set()
     rodada = 0
-    while len(escolhidas) < cfg["max_materias_por_tema"] and any(rodada < len(l) for l in por_fonte):
+    while len(escolhidas) < maximo and any(rodada < len(l) for l in por_fonte):
         for lista in por_fonte:
-            if rodada < len(lista) and len(escolhidas) < cfg["max_materias_por_tema"]:
+            if rodada < len(lista) and len(escolhidas) < maximo:
                 item = lista[rodada]
                 tn = titulo_normalizado(item["titulo"])
                 if tn not in titulos_vistos:

@@ -10,7 +10,9 @@ velocidade: "+0%"                  # "+10%" = mais rápido, "-10%" = mais lento
 duracao_minutos: 30
 palavras_por_minuto: 150           # episódios saindo curtos/longos? ajuste este número
 horas_retroativas: 48              # só considera notícias das últimas X horas
-manter_episodios: 7                # episódios mais antigos são apagados
+manter_episodios: 7
+max_materias_por_tema: 15         # máximo de matérias por tema (pode ser trocado dentro de cada tema com 'max_materias')
+max_por_fonte: 5                   # máximo de matérias por fonte RSS em cada tema                # episódios mais antigos são apagados
 
 sobre_o_ouvinte: >
   Desenvolvedor brasileiro, trabalha principalmente com Next.js e CSS e também

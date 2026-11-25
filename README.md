@@ -53,6 +53,9 @@ Tudo está em `config/<pessoa>.yaml`. Não precisa mexer no código.
 - **Mais ou menos tempo para um tema**: mude o `peso` (é proporcional).
 - **Filtrar assunto**: `palavras_chave` (sobem na fila), `somente_com_palavra_chave: true`
   (descarta o resto) e `excluir` (ignora matérias com esses termos).
+- **Quantidade de matérias**: `max_materias_por_tema` e `max_por_fonte` no topo do perfil; para um
+  tema específico, escreva `max_materias: 20` dentro dele. Só entra o que foi publicado nas últimas
+  `horas_retroativas`, então mais matérias também dependem de ter mais fontes ou de aumentar esse prazo.
 - **Voz e velocidade**: `voz` e `velocidade`. Veja as vozes com `edge-tts --list-voices`.
 - **Adicionar uma pessoa**: crie `config/nome.yaml` (copie um existente). O workflow pega sozinho.
 

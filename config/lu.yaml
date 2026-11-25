@@ -12,6 +12,8 @@ duracao_minutos: 30
 palavras_por_minuto: 150
 horas_retroativas: 48
 manter_episodios: 7
+max_materias_por_tema: 15         # máximo de matérias por tema (pode ser trocado dentro de cada tema com 'max_materias')
+max_por_fonte: 5                   # máximo de matérias por fonte RSS em cada tema
 
 sobre_o_ouvinte: >
   Brasileira, moradora do Rio de Janeiro. Gosta de um resumo leve e bem explicado,
