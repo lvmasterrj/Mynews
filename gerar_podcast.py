@@ -17,7 +17,7 @@ Uso:
 
 Variáveis de ambiente:
   GEMINI_API_KEY  chave da API do Gemini (obrigatória, exceto em --checar-feeds)
-  GEMINI_MODEL    modelo (opcional; padrão: gemini-2.5-flash)
+  GEMINI_MODEL    modelo (opcional; sem ele, o script testa uma lista de modelos Flash)
   BASE_URL        endereço público do site, usado dentro do feed.xml
 """
 from __future__ import annotations
@@ -51,7 +51,9 @@ log = logging.getLogger("podcast")
 
 TZ = ZoneInfo("America/Sao_Paulo")
 UA = "Mozilla/5.0 (compatible; PodcastDiarioPessoal/1.0)"
-MODELO_PADRAO = "gemini-2.5-flash"
+# Testados em ordem: o Google aposenta modelos com frequência (o 2.5 já saiu para contas novas).
+MODELOS_PADRAO = ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite",
+                  "gemini-2.5-flash-lite"]
 ITUNES = "http://www.itunes.com/dtds/podcast-1.0.dtd"
 ATOM = "http://www.w3.org/2005/Atom"
 MINUTOS_INTRO_OUTRO = 1.5
@@ -292,6 +294,10 @@ def enriquecer(itens: list[dict]) -> None:
 
 # ------------------------------------------------------------------- Gemini
 
+class ModeloIndisponivel(RuntimeError):
+    """O modelo não existe, foi aposentado ou não tem cota gratuita para esta chave."""
+
+
 def gemini(prompt: str, sistema: str, modelo: str, chave: str, tentativas: int = 5) -> str:
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent"
     corpo = {
@@ -303,6 +309,8 @@ def gemini(prompt: str, sistema: str, modelo: str, chave: str, tentativas: int =
     for i in range(tentativas):
         r = requests.post(url, headers={"x-goog-api-key": chave, "Content-Type": "application/json"},
                           json=corpo, timeout=180)
+        if r.status_code == 404 or (r.status_code == 429 and "limit: 0" in r.text):
+            raise ModeloIndisponivel(f"{modelo}: HTTP {r.status_code}: {r.text[:160]}")
         if r.status_code in (429, 500, 503):
             espera = min(60, 5 * 2 ** i)
             ultimo_erro = f"HTTP {r.status_code}"
@@ -322,6 +330,20 @@ def gemini(prompt: str, sistema: str, modelo: str, chave: str, tentativas: int =
         ultimo_erro = f"resposta vazia: {str(dados)[:200]}"
         time.sleep(3)
     raise RuntimeError(f"Gemini falhou após {tentativas} tentativas ({ultimo_erro})")
+
+
+def gemini_com_fallback(prompt: str, sis: str, modelos: list[str], chave: str) -> str:
+    """Usa o primeiro modelo da lista; se ele estiver indisponível, descarta e tenta o próximo."""
+    while modelos:
+        try:
+            return gemini(prompt, sis, modelos[0], chave)
+        except ModeloIndisponivel as e:
+            log.warning("  modelo indisponível (%s)", e)
+            modelos.pop(0)
+            if modelos:
+                log.warning("  tentando %s", modelos[0])
+    raise RuntimeError("nenhum modelo Gemini disponível; defina GEMINI_MODEL com um modelo Flash "
+                       "que tenha plano gratuito (veja ai.google.dev/gemini-api/docs/pricing)")
 
 
 def sistema(cfg: dict) -> str:
@@ -353,9 +375,9 @@ def montar_prompt(cfg: dict, tema: dict, itens: list[dict], palavras: int) -> st
 
 
 def escrever_bloco(cfg: dict, tema: dict, itens: list[dict], palavras: int,
-                   chave: str, modelo: str) -> str:
+                   chave: str, modelos: list[str]) -> str:
     prompt = montar_prompt(cfg, tema, itens, palavras)
-    texto = limpar_para_fala(gemini(prompt, sistema(cfg), modelo, chave))
+    texto = limpar_para_fala(gemini_com_fallback(prompt, sistema(cfg), modelos, chave))
     time.sleep(cfg["pausa_entre_chamadas_s"])
     if contar_palavras(texto) < palavras * 0.7 and len(itens) >= 3:
         log.info("  bloco curto (%d de ~%d palavras); pedindo versão mais completa",
@@ -364,7 +386,7 @@ def escrever_bloco(cfg: dict, tema: dict, itens: list[dict], palavras: int,
                   f"Reescreva o bloco inteiro, mais completo e aprofundado, com cerca de {palavras} "
                   "palavras, usando apenas o material acima.")
         try:
-            ampliado = limpar_para_fala(gemini(pedido, sistema(cfg), modelo, chave))
+            ampliado = limpar_para_fala(gemini_com_fallback(pedido, sistema(cfg), modelos, chave))
             if contar_palavras(ampliado) > contar_palavras(texto):
                 texto = ampliado
         except Exception as e:
@@ -509,7 +531,7 @@ def checar_feeds(cfg: dict) -> None:
                 print(f"  FALHA {url} -> {e}")
 
 
-def processar_perfil(caminho: Path, args, chave: str, modelo: str, base_url: str) -> None:
+def processar_perfil(caminho: Path, args, chave: str, modelos: list[str], base_url: str) -> None:
     cfg = carregar_config(caminho)
     log.info("=== %s ===", caminho.stem)
     if "troque" in cfg["slug"]:
@@ -559,7 +581,7 @@ def processar_perfil(caminho: Path, args, chave: str, modelo: str, base_url: str
                        PALAVRAS_MAX_POR_MATERIA * len(itens))
         log.info("Escrevendo: %s (~%d palavras)", tema["nome"], palavras)
         try:
-            blocos.append(escrever_bloco(cfg, tema, itens, palavras, chave, modelo))
+            blocos.append(escrever_bloco(cfg, tema, itens, palavras, chave, modelos))
             usados.append((tema, itens))
         except Exception as e:
             log.error("  tema ignorado (%s)", e)
@@ -653,13 +675,14 @@ def main(argv: list[str] | None = None) -> int:
     if not args.checar_feeds and not chave:
         print("Defina a variável de ambiente GEMINI_API_KEY.", file=sys.stderr)
         return 2
-    modelo = os.environ.get("GEMINI_MODEL", "").strip() or MODELO_PADRAO
+    escolhido = os.environ.get("GEMINI_MODEL", "").strip()
+    modelos = [escolhido] if escolhido else list(MODELOS_PADRAO)
     base_url = os.environ.get("BASE_URL", "http://localhost:8000").rstrip("/")
 
     falhas = 0
     for caminho in perfis:
         try:
-            processar_perfil(caminho, args, chave, modelo, base_url)
+            processar_perfil(caminho, args, chave, modelos, base_url)
         except Exception:
             falhas += 1
             log.exception("Perfil %s falhou", caminho.stem)

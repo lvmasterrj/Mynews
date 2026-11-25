@@ -86,9 +86,10 @@ sobras de notícias). Use `--refazer` para substituí-lo, por exemplo depois de 
 
 ## Problemas comuns
 
-- **Gemini retorna 404 / modelo não encontrado**: o Google troca e aposenta modelos. Defina a
+- **Gemini retorna 404 / modelo não encontrado**: o Google aposenta modelos. O script já tenta
+  vários em sequência (`MODELOS_PADRAO` em `gerar_podcast.py`). Se todos falharem, defina a
   variável `GEMINI_MODEL` (no workflow, em `env:`) com um modelo Flash que tenha plano gratuito,
-  conforme https://ai.google.dev/gemini-api/docs/pricing. O padrão é `gemini-2.5-flash`.
+  conforme https://ai.google.dev/gemini-api/docs/pricing.
 - **Gemini retorna 429**: limite do plano gratuito. O script espera e tenta de novo; se persistir,
   aumente `pausa_entre_chamadas_s` no perfil ou reduza o número de temas.
 - **edge-tts falha só no GitHub**: o serviço é não oficial e às vezes bloqueia IPs de nuvem.
