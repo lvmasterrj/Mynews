@@ -1,0 +1,99 @@
+# =====================================================================
+#  PERFIL DO LEO  -  edite à vontade; o próximo episódio já usa as mudanças
+# =====================================================================
+nome: Leo                          # como o apresentador te chama
+slug: leo-troque-este-codigo       # vira parte da URL do feed. TROQUE por algo aleatório (ex.: leo-k7x2p9qm)
+titulo_podcast: Resumo da Manhã do Leo
+voz: pt-BR-AntonioNeural           # outra opção: pt-BR-FranciscaNeural (lista: edge-tts --list-voices)
+genero_voz: masculino              # masculino | feminino (ajusta como o apresentador fala de si)
+velocidade: "+0%"                  # "+10%" = mais rápido, "-10%" = mais lento
+duracao_minutos: 30
+palavras_por_minuto: 150           # episódios saindo curtos/longos? ajuste este número
+horas_retroativas: 48              # só considera notícias das últimas X horas
+manter_episodios: 7                # episódios mais antigos são apagados
+
+sobre_o_ouvinte: >
+  Desenvolvedor brasileiro, trabalha principalmente com Next.js e CSS e também
+  toca um pequeno negócio de impressão 3D. Prefere explicações práticas e diretas.
+
+# ---------------------------------------------------------------------
+#  TEMAS
+#   peso ........................ quanto do episódio o tema ocupa (proporcional)
+#   instrucoes .................. orientações extras para a IA sobre este tema
+#   palavras_chave .............. matérias com esses termos passam na frente
+#   somente_com_palavra_chave ... true = descarta matérias sem nenhuma palavra-chave
+#   excluir ..................... matérias com esses termos são ignoradas
+#   nome_falado ................. (opcional) como o nome do tema é lido em voz alta
+#   fontes ...................... feeds RSS (teste com: --checar-feeds)
+# ---------------------------------------------------------------------
+temas:
+  - nome: Desenvolvimento web (Next.js, React, CSS)
+    nome_falado: Desenvolvimento web
+    peso: 4
+    instrucoes: >
+      Foque em novidades de Next.js, React, Vercel, CSS moderno e performance web.
+      Explique o que muda na prática para quem desenvolve. Muitas fontes estão em
+      inglês: traduza e adapte para o português falado.
+    palavras_chave: [next.js, nextjs, react, css, tailwind, vercel, typescript, turbopack]
+    fontes:
+      - https://nextjs.org/feed.xml
+      - https://vercel.com/atom
+      - https://react.dev/rss.xml
+      - https://css-tricks.com/feed/
+      - https://www.smashingmagazine.com/feed/
+      - https://web.dev/feed.xml
+
+  - nome: Tecnologia e inteligência artificial
+    peso: 4
+    instrucoes: >
+      Priorize lançamentos, mudanças em produtos de IA e ferramentas para
+      desenvolvedores. Evite rumores e fofocas.
+    palavras_chave: [ia, inteligência artificial, openai, anthropic, google, gemini, claude, llm, android]
+    fontes:
+      - https://news.ycombinator.com/rss
+      - https://tecnoblog.net/feed/
+      - https://canaltech.com.br/rss/
+      - https://www.theverge.com/rss/index.xml
+      - https://techcrunch.com/feed/
+
+  - nome: Impressão 3D e Blender
+    peso: 3
+    instrucoes: >
+      Foque em novas impressoras, filamentos, slicers, técnicas e dicas de produção.
+      Em Blender, destaque versões novas e recursos úteis para modelar peças imprimíveis.
+    fontes:
+      - https://blog.prusa3d.com/feed/
+      - https://3dprint.com/feed/
+      - https://hackaday.com/tag/3d-printing/feed/
+      - https://www.blender.org/feed/
+
+  - nome: Economia e investimentos
+    peso: 3
+    instrucoes: >
+      Cubra juros, inflação, câmbio, bolsa e renda fixa no Brasil, em linguagem
+      simples, explicando por que os números importam. Apenas informe: não faça
+      recomendação de compra ou venda.
+    fontes:
+      - https://www.infomoney.com.br/feed/
+      - https://g1.globo.com/rss/g1/economia/
+      - https://feeds.folha.uol.com.br/mercado/rss091.xml
+      - https://www.moneytimes.com.br/feed/
+
+  - nome: Rio de Janeiro e Brasil
+    peso: 4
+    instrucoes: >
+      Comece pelo que mais afeta o dia no Rio de Janeiro (trânsito, segurança,
+      tempo, serviços) e depois os principais fatos do Brasil. Tom neutro e factual.
+    fontes:
+      - https://g1.globo.com/rss/g1/rio-de-janeiro/
+      - https://g1.globo.com/rss/g1/
+      - https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml
+      - https://feeds.bbci.co.uk/portuguese/rss.xml
+
+  # Exemplo de tema extra: tire o # do começo das linhas para ativar
+  # - nome: Energia solar
+  #   peso: 2
+  #   instrucoes: >
+  #     Regras da ANEEL, preços de sistemas, financiamento e novidades de equipamentos no Brasil.
+  #   fontes:
+  #     - https://www.canalsolar.com.br/feed/

@@ -1,0 +1,53 @@
+# =====================================================================
+#  PERFIL DA ESPOSA  -  os temas abaixo são só um ponto de partida.
+#  Troque pelos interesses dela (veja os comentários em leo.yaml).
+# =====================================================================
+nome: Seu nome aqui                # como o apresentador chama ela (ex.: Maria)
+slug: esposa-troque-este-codigo    # vira parte da URL do feed. TROQUE por algo aleatório (ex.: maria-q4w8z1nc)
+titulo_podcast: Resumo da Manhã
+voz: pt-BR-FranciscaNeural         # outra opção: pt-BR-AntonioNeural
+genero_voz: feminino
+velocidade: "+0%"
+duracao_minutos: 30
+palavras_por_minuto: 150
+horas_retroativas: 48
+manter_episodios: 7
+
+sobre_o_ouvinte: >
+  Brasileira, moradora do Rio de Janeiro. Gosta de um resumo leve e bem explicado,
+  sem sensacionalismo.
+
+temas:
+  - nome: Brasil e mundo
+    peso: 4
+    instrucoes: >
+      Principais fatos do dia, com contexto. Tom neutro e factual.
+    fontes:
+      - https://g1.globo.com/rss/g1/
+      - https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml
+      - https://feeds.bbci.co.uk/portuguese/rss.xml
+      - https://feeds.folha.uol.com.br/emcimadahora/rss091.xml
+
+  - nome: Rio de Janeiro
+    peso: 3
+    instrucoes: >
+      Trânsito, tempo, segurança, serviços e eventos que afetam o dia a dia na cidade.
+    fontes:
+      - https://g1.globo.com/rss/g1/rio-de-janeiro/
+
+  - nome: Saúde e bem-estar
+    peso: 3
+    instrucoes: >
+      Pesquisas e dicas de saúde explicadas de forma simples. Não dê diagnóstico
+      nem recomendação médica; lembre que dúvidas devem ir ao médico.
+    fontes:
+      - https://g1.globo.com/rss/g1/ciencia-e-saude/
+      - https://drauziovarella.uol.com.br/feed/
+
+  - nome: Cultura, cinema e séries
+    peso: 3
+    instrucoes: >
+      Estreias, lançamentos e novidades do mundo do entretenimento. Evite spoilers.
+    fontes:
+      - https://g1.globo.com/rss/g1/pop-arte/
+      - https://feeds.folha.uol.com.br/ilustrada/rss091.xml

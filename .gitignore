@@ -1,0 +1,5 @@
+site/
+site_teste/
+rascunhos/
+__pycache__/
+.env

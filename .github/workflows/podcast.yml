@@ -1,0 +1,84 @@
+name: Podcast diário
+
+on:
+  schedule:
+    # 04:30 em Brasília (07:30 UTC). O GitHub pode atrasar alguns minutos.
+    - cron: "30 7 * * *"
+  workflow_dispatch:            # botão "Run workflow" para gerar na hora
+    inputs:
+      perfil:
+        description: "Perfil (nome do arquivo em config/, sem .yaml) ou 'todos'"
+        default: "todos"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: podcast
+  cancel-in-progress: false
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+      PERFIL: ${{ github.event.inputs.perfil || 'todos' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Trazer o site já publicado (episódios anteriores)
+        run: |
+          set +e
+          git ls-remote --exit-code --heads origin gh-pages > /dev/null
+          rc=$?
+          set -e
+          if [ "$rc" -eq 0 ]; then
+            git fetch --depth 1 origin gh-pages
+            mkdir site
+            git archive FETCH_HEAD | tar -x -C site
+          elif [ "$rc" -eq 2 ]; then
+            echo "Primeira execução: branch gh-pages ainda não existe."
+            mkdir site
+          else
+            echo "Não consegui consultar o repositório (código $rc)."
+            exit 1
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+          which ffmpeg > /dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+
+      - name: Gerar episódios
+        id: gerar
+        continue-on-error: true
+        run: |
+          if [ "$PERFIL" = "todos" ]; then
+            python gerar_podcast.py --todos --saida site
+          else
+            python gerar_podcast.py --perfil "$PERFIL" --saida site
+          fi
+
+      - name: Publicar no GitHub Pages (branch gh-pages)
+        working-directory: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          touch .nojekyll
+          git init -q -b gh-pages
+          git config user.name "podcast-bot"
+          git config user.email "podcast-bot@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Episódios de $(date -u +%F)"
+          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" gh-pages
+
+      - name: Falhar o job se a geração deu erro (assim o GitHub avisa por e-mail)
+        if: steps.gerar.outcome == 'failure'
+        run: exit 1
