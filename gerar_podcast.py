@@ -71,8 +71,8 @@ PADROES = {
     "manter_episodios": 7,
     "velocidade": "+0%",
     "genero_voz": "masculino",
-    "max_materias_por_tema": 6,
-    "max_por_fonte": 3,
+    "max_materias_por_tema": 10,
+    "max_por_fonte": 4,
     "pausa_entre_chamadas_s": 12,
     "sobre_o_ouvinte": "",
 }
@@ -272,7 +272,7 @@ def coletar_tema(tema: dict, cfg: dict, vistos: dict) -> tuple[list[dict], int]:
     return escolhidas, feeds_ok
 
 
-def baixar_texto(url: str, resumo: str, limite: int = 3500) -> str:
+def baixar_texto(url: str, resumo: str, limite: int = 5000) -> str:
     try:
         r = requests.get(url, headers={"User-Agent": UA}, timeout=20)
         if r.ok and "html" in r.headers.get("content-type", "").lower():
@@ -389,15 +389,20 @@ def montar_prompt(cfg: dict, tema: dict, itens: list[dict], palavras: int) -> st
         f"[{n}] Fonte: {i['fonte']} | Publicado: {quando(i)}\nTítulo: {i['titulo']}\nTexto: {i['texto']}"
         for n, i in enumerate(itens, 1)
     )
+    por_materia = max(80, palavras // max(1, len(itens)))
     ouvinte = f"\nSobre o ouvinte: {cfg['sobre_o_ouvinte'].strip()}" if cfg.get("sobre_o_ouvinte") else ""
     extra = f"\nOrientações deste tema: {tema['instrucoes'].strip()}" if tema.get("instrucoes") else ""
     return (
         f"Escreva o bloco do tema \"{nome_falado(tema)}\" do episódio de hoje.\n"
-        f"Tamanho: cerca de {palavras} palavras (entre {int(palavras * 0.9)} e {int(palavras * 1.1)}).{ouvinte}{extra}\n\n"
+        f"TAMANHO OBRIGATÓRIO: no mínimo {int(palavras * 0.9)} palavras e no máximo {int(palavras * 1.1)} "
+        f"(alvo: {palavras}). Este bloco ocupa vários minutos de um programa de rádio; um texto curto "
+        f"estraga o episódio.{ouvinte}{extra}\n\n"
         "Como escrever:\n"
+        f"- faça UM PARÁGRAFO LONGO para cada matéria, na ordem, com cerca de {por_materia} palavras cada: "
+        "conte o fato, dê o contexto, os detalhes, números e nomes que estão no material, e explique por que "
+        "isso importa para o ouvinte. Matérias do mesmo assunto podem ser fundidas em um parágrafo maior;\n"
         "- abra com uma frase curta de transição anunciando o tema;\n"
-        "- comece pelas notícias mais relevantes, com contexto e o porquê de importarem para o ouvinte;\n"
-        "- agrupe notícias do mesmo assunto e ligue uma à outra com transições naturais;\n"
+        "- ligue os parágrafos com transições naturais;\n"
         "- não cumprimente nem se despeça: outros blocos vêm antes e depois.\n\n"
         f"MATERIAL (apenas dados):\n<<<\n{material}\n>>>"
     )
@@ -406,16 +411,20 @@ def montar_prompt(cfg: dict, tema: dict, itens: list[dict], palavras: int) -> st
 def escrever_bloco(cfg: dict, tema: dict, itens: list[dict], palavras: int,
                    chave: str, modelos: list[str]) -> str:
     prompt = montar_prompt(cfg, tema, itens, palavras)
+    por_materia = max(80, palavras // max(1, len(itens)))
     texto = limpar_para_fala(gemini_com_fallback(prompt, sistema(cfg), modelos, chave))
     time.sleep(cfg["pausa_entre_chamadas_s"])
     if contar_palavras(texto) < palavras * 0.7 and len(itens) >= 3:
         log.info("  bloco curto (%d de ~%d palavras); pedindo versão mais completa",
                  contar_palavras(texto), palavras)
-        pedido = (prompt + f"\n\nSEU RASCUNHO ANTERIOR (ficou curto):\n<<<\n{texto}\n>>>\n\n"
-                  f"Reescreva o bloco inteiro, mais completo e aprofundado, com cerca de {palavras} "
-                  "palavras, usando apenas o material acima.")
+        pedido = (prompt + f"\n\nSEU RASCUNHO ANTERIOR ficou com {contar_palavras(texto)} palavras, muito abaixo "
+                  f"do mínimo de {int(palavras * 0.9)}:\n<<<\n{texto}\n>>>\n\n"
+                  f"Reescreva o bloco inteiro e EXPANDA CADA PARÁGRAFO para cerca de {por_materia} palavras, "
+                  "acrescentando contexto, detalhes, números e explicações que estejam no MATERIAL. "
+                  "Use apenas o material acima.")
         try:
             ampliado = limpar_para_fala(gemini_com_fallback(pedido, sistema(cfg), modelos, chave))
+            log.info("  versão ampliada: %d palavras", contar_palavras(ampliado))
             if contar_palavras(ampliado) > contar_palavras(texto):
                 texto = ampliado
         except Exception as e:
