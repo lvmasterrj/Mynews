@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+  <channel>
+    <title>Resumo da Manhã do Leo</title>
+    <link>https://lvmasterrj.github.io/Mynews/leo-2xk0na98/</link>
+    <description>Resumo diário de notícias feito por IA para Leo.</description>
+    <language>pt-br</language>
+    <atom:link href="https://lvmasterrj.github.io/Mynews/leo-2xk0na98/feed.xml" rel="self" type="application/rss+xml" />
+    <itunes:author>Podcast diário</itunes:author>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:category text="News" />
+    <item>
+      <title>Sexta-feira, 27/11/2026</title>
+      <description>Desenvolvimento web
+• Using light-dark() without getting caught out (CSS-Tricks) https://css-tricks.com/using-light-dark-without-getting-caught-out/
+
+Tecnologia e inteligência artificial
+• Show HN: I restored Palm's last device, and brought its OS to other platforms (Hacker News: Front Page) https://www.webosarchive.org/pivot/2026/11/27/the-story-so-far/
+• Galaxy Watch 8 tem oferta agressiva e cai para menos de R$ 1 mil na Black Week (Tecnoblog) https://tecnoblog.net/achados/galaxy-watch-8-tem-oferta-agressiva-e-cai-para-menos-de-r-1-mil-na-black-week/
+• ChatGPT quer tomar vaga do Gemini no Android fazendo ligações e lendo a tela (Canaltech) https://canaltech.com.br/inteligencia-artificial/chatgpt-quer-tomar-vaga-do-gemini-no-android-fazendo-ligacoes-e-lendo-a-tela/
+• Android’s DIY widgets are a bit of vibe-coding fun (The Verge) https://www.theverge.com/tech/1041801/android-intelligence-create-my-widget-gemini
+• Nvidia hits pause on chip shipments to Southeast Asia (TechCrunch) https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/
+• Claude sabotaging ML research tasks? (Hacker News: Front Page) https://twitter.com/RealAstropulse/status/2126119408997466389
+• Amazon avalia impacto do Muse na publicidade antes de liberar agente (Tecnoblog) https://tecnoblog.net/noticias/amazon-avalia-impacto-do-muse-na-publicidade-antes-de-liberar-agente/
+• Gemini Live vai ganhar aba de Atividade para gerenciar tarefas e rotinas da IA (Canaltech) https://canaltech.com.br/apps/gemini-live-vai-ganhar-aba-de-atividade-para-gerenciar-tarefas-e-rotinas-da-ia/
+• Here are the best Black Friday deals you can grab for $30 or less (The Verge) https://www.theverge.com/gadgets/1039645/black-friday-best-cheap-tech-deals-under-30-2026
+• Is Alice Huang a spy or not? (TechCrunch) https://techcrunch.com/2026/11/26/is-alice-huang-a-spy-or-not/
+• "What's Claude's fursona?" and other questions (Hacker News: Front Page) https://herecomesthemoon.net/2026/11/whats-claudes-fursona/
+• Hackers invadem principal plataforma de nuvem da Força Aérea dos EUA (Tecnoblog) https://tecnoblog.net/noticias/hackers-invadem-principal-plataforma-de-nuvem-da-forca-aerea-dos-eua/
+• iPhone 16e de 128 GB entra em oferta por menos de R$ 3.000 no Magalu (Canaltech) https://canaltech.com.br/smartphone/iphone-16e-de-128-gb-entra-em-oferta-por-menos-de-r-3000-no-magalu/
+• The absolute best Black Friday deals we’ve found (so far) (The Verge) https://www.theverge.com/gadgets/1039190/best-black-friday-2026-deals-tech-gadgets-gift-ideas
+• X finally gets parental controls after 20 years (TechCrunch) https://techcrunch.com/2026/11/26/x-finally-gets-parental-controls-after-20-years/
+
+Impressão 3D e Blender
+• Push Button Metal: Timid (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/333899/push-button-metal-timid/
+• 3MF Toolpath Extension v1.0.0: An Open LPBF Build Format, Proven in Production (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/337679/3mf-toolpath-extension-v1-0-0-an-open-lpbf-build-format-proven-in-production/
+
+Economia e investimentos
+• Tesouro IPCA+ rende mais de 9% em menos de uma semana com “efeito Trabuco” (InfoMoney) https://www.infomoney.com.br/onde-investir/tesouro-ipca-quanto-rende-efeito-trabuco/
+• Manutenção de Moretti no Ministério do Planejamento é vista como praticamente certa, em um aceno de Lula ao PT (g1 &gt; Economia) https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/27/manutencao-de-moretti-no-ministerio-do-planejamento-e-vista-como-praticamente-certa-em-um-aceno-de-lula-ao-pt.ghtml
+• B3 fecha acordo com bancos para criar stablecoin em reais (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://c-level.folha.uol.com.br/financas/2026/11/b3-fecha-acordo-com-bancos-para-criar-stablecoin-em-reais.shtml
+• Bolsas da Europa fecham em alta com setor tech e expectativas sobre futuro do BCE (Money Times) https://www.moneytimes.com.br/bolsas-da-europa-fecham-em-alta-com-setor-tech-e-expectativas-sobre-futuro-do-bce-davs/
+• Black Friday da Latam Airlines oferece passagens nacionais a partir de R$ 121; veja (InfoMoney) https://www.infomoney.com.br/mercados/black-friday-latam-airlines-passagens-pacotes/
+• No dia da Black Friday, 20% dos produtos ficam mais caros em apenas 12 horas; 60% dos itens seguem com desconto (g1 &gt; Economia) https://g1.globo.com/guia/guia-de-compras/ofertas-black-friday-precos-sobem-em-12-horas-60porcento-seguem-com-desconto.ghtml
+• Pluxee e Petrobras integram grupo sobre segurança alimentar de trabalhadores na ONU (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://www1.folha.uol.com.br/colunas/painelsa/2026/11/pluxee-e-petrobras-integram-grupo-sobre-seguranca-alimentar-de-trabalhadores-na-onu.shtml
+• ‘Nanocoins’: Quais são os riscos e as vantagens de investir em criptomoedas com menor valor de mercado? (Money Times) https://www.moneytimes.com.br/nanocoins-quais-sao-os-riscos-e-as-vantagens-de-investir-em-criptomoedas-com-menor-valor-de-mercado-lbrdgm111/
+• Senador pede levantamento do sigilo de relatórios sobre ministros ao STF (InfoMoney) https://www.infomoney.com.br/politica/senador-pede-levantamento-do-sigilo-de-relatorios-sobre-ministros-ao-stf/
+• Justiça do Paraguai ordena prisão de ex-ministro da Economia por crise bancária (g1 &gt; Economia) https://g1.globo.com/mundo/noticia/2026/11/27/justica-paraguai-ordena-prisao-ex-ministro-economia.ghtml
+• Raízen considera vender negócio de distribuição de combustíveis, diz Ometto (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://c-level.folha.uol.com.br/negocios/2026/11/raizen-considera-vender-negocio-de-distribuicao-de-combustiveis-diz-ometto.shtml
+• BC: inadimplência de produtores no crédito rural sobe para 9,6% em outubro (Money Times) https://www.moneytimes.com.br/bc-inadimplencia-de-produtores-no-credito-rural-sobe-para-96-em-outubro-pads/
+• Lula escolhe Camilo Santana para comandar a Casa Civil, dizem aliados (InfoMoney) https://www.infomoney.com.br/politica/lula-escolhe-camilo-santana-para-comandar-a-casa-civil-dizem-aliados/
+• Veja como criar e introduzir abelhas-rainhas nas colmeias (g1 &gt; Economia) https://g1.globo.com/economia/agronegocios/globo-rural/noticia/2026/11/27/veja-como-criar-e-introduzir-abelhas-rainhas-nas-colmeias.ghtml
+• Trabuco no Lula 4 deve distensionar relação de conflito com BC, dizem aliados (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://www1.folha.uol.com.br/mercado/2026/11/trabuco-no-lula-4-deve-distensionar-relacao-de-conflito-com-bc-dizem-aliados.shtml
+
+Rio de Janeiro e Brasil
+• VÍDEOS: Bom Dia Acre desta sexta-feira, 27 de novembro de 2026 (g1) https://g1.globo.com/ac/acre/playlist/videos-bom-dia-acre-desta-sexta-feira-27-de-novembro-de-2026.ghtml
+• Lula garante benefícios em novo governo, mas defende revisão (Feed Últimas) https://agenciabrasil.ebc.com.br/politica/noticia/2026-11/lula-garante-beneficios-em-novo-governo-mas-defende-revisao
+• Os 3 principais problemas que Trabuco terá que enfrentar na Fazenda no quarto mandato de Lula (BBC Brasil) https://www.bbc.com/portuguese/articles/c95y12eme1jgo?at_medium=RSS&amp;at_campaign=rss
+• Jovem baleado pelo irmão corre para o colo da mãe, que implora para filho parar de atirar no ES; vítima não resistiu (g1) https://g1.globo.com/es/espirito-santo/noticia/2026/11/27/jovem-baleado-pelo-irmao-corre-para-o-colo-da-mae-que-implora-para-filho-parar-de-atirar-no-es-vitima-nao-resistiu.ghtml
+• Fachin mantém prisão de Paulo Henrique Costa, ex-presidente do BRB (Feed Últimas) https://agenciabrasil.ebc.com.br/justica/noticia/2026-11/fachin-mantem-prisao-de-paulo-henrique-costa-ex-presidente-do-brb
+• Dólar cai e bolsa sobe: a reação do mercado - e de economistas - à escolha de Trabuco para a Fazenda (BBC Brasil) https://www.bbc.com/portuguese/articles/cv8e014e88xgo?at_medium=RSS&amp;at_campaign=rss
+• Justiça determina demolição de construções irregulares de hotel em São Luís (g1) https://g1.globo.com/ma/maranhao/noticia/2026/11/27/justica-determina-demolicao-de-construcoes-irregulares-de-hotel-em-sao-luis.ghtml
+• Manaus suspende atividades em parques após piora na qualidade do ar (Feed Últimas) https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-11/manaus-suspende-atividades-em-parques-apos-piora-na-qualidade-do-ar
+• Zelensky critica 'estranha amizade' entre Trump e Putin em entrevista à BBC: 'Putin é um agressor e assassino' (BBC Brasil) https://www.bbc.com/portuguese/articles/cm5y1pwkr0wwo?at_medium=RSS&amp;at_campaign=rss
+• Cleitinho anuncia secretários de Fazenda e Segurança Pública (g1) https://g1.globo.com/mg/minas-gerais/noticia/2026/11/27/cleitinho-anuncia-novos-secretarios-de-fazenda-e-seguranca-publica-de-mg.ghtml
+• Polícia Civil prende líder de milícia no Rio de Janeiro (Feed Últimas) https://agenciabrasil.ebc.com.br/geral/noticia/2026-11/policia-civil-prende-lider-de-milicia-no-rio-de-janeiro
+• O imigrante que ganhou US$ 1 milhão na loteria e foi preso pelo ICE: 'A sorte acabou' (BBC Brasil) https://www.bbc.com/portuguese/articles/cw62pn5qz6m3o?at_medium=RSS&amp;at_campaign=rss
+• Manutenção de Moretti no Ministério do Planejamento é vista como praticamente certa, em um aceno de Lula ao PT (g1) https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/27/manutencao-de-moretti-no-ministerio-do-planejamento-e-vista-como-praticamente-certa-em-um-aceno-de-lula-ao-pt.ghtml
+• Contas do governo têm superávit de R$ 52,3 bilhões em outubro (Feed Últimas) https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/contas-do-governo-tem-superavit-de-r-523-bilhoes-em-outubro
+• A reação da imprensa internacional à indicação de Trabuco para o Ministério da Fazenda (BBC Brasil) https://www.bbc.com/portuguese/articles/cw20x68drd43o?at_medium=RSS&amp;at_campaign=rss</description>
+      <pubDate>Fri, 27 Nov 2026 14:37:19 -0300</pubDate>
+      <guid isPermaLink="false">leo-2xk0na98-20261127</guid>
+      <enclosure url="https://lvmasterrj.github.io/Mynews/leo-2xk0na98/ep-2026-11-27.mp3" length="6455612" type="audio/mpeg" />
+      <itunes:duration>00:17:55</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    <item>
+      <title>Quinta-feira, 26/11/2026</title>
+      <description>Desenvolvimento web
+• How Cozey turns its operators into software builders on Vercel (Vercel News) https://vercel.com/blog/how-cozey-turns-its-operators-into-software-builders-on-vercel
+• RSS Club: Preview Art-Directed Scrollytelling Article (CSS-Tricks) https://css-tricks.com/rss-club-preview-art-directed-scrollytelling-article/
+• Workflow is 10x faster, again (Vercel News) https://vercel.com/changelog/workflows-speculative-execution
+• Style Queries as Conditional Modifiers (CSS-Tricks) https://css-tricks.com/css-style-queries-as-conditional-modifiers/
+• Standard builds for existing Pro teams have moved to usage-based billing (Vercel News) https://vercel.com/changelog/standard-builds-for-existing-pro-teams-have-moved-to-usage-based-billing
+
+Tecnologia e inteligência artificial
+• One guy is doing an hunger strike at Anthropic, currently in his 3rd day (Hacker News: Front Page) https://twitter.com/ElliotC1/status/2125689373337489419
+• Bancos dos EUA criam “botão de emergência” contra agentes de IA (Tecnoblog) https://tecnoblog.net/noticias/bancos-dos-eua-implementam-botao-de-emergencia-contra-agentes-de-ia/
+• Black Friday: Galaxy A57 e Watch9 juntos por menos que um Galaxy S25 FE (Canaltech) https://canaltech.com.br/smartphone/black-friday-galaxy-a57-e-watch9-juntos-por-menos-que-um-galaxy-s25-fe/
+• Android app developers will soon have to share their address publicly (The Verge) https://www.theverge.com/tech/1043228/android-play-store-google-developer-address-eu
+• As Anthropic IPOs, Grand Theft Auto VI proves why efficiency isn’t a virtue (TechCrunch) https://techcrunch.com/2026/11/26/as-anthropic-ipos-grand-theft-auto-vi-proves-why-efficiency-isnt-a-virtue/
+• Unconditional Integer Factorization in Subexponential Time (Hacker News: Front Page) https://github.com/google-research/google-research/tree/4a7bc8ab0bc770e71a259b7966c500496b99010a/cogentic_research_papers/integer_factorization
+• Como programar uma mensagem no WhatsApp (Tecnoblog) https://tecnoblog.net/responde/como-agendar-mensagens-no-whatsapp/
+• Galaxy Buds Core ou Buds 4: qual comprar na Black Friday? (Canaltech) https://canaltech.com.br/fone-de-ouvido/galaxy-buds-core-ou-buds-4-qual-comprar-na-black-friday/
+• The MacBook Neo is receiving a rare $100 discount for Black Friday (The Verge) https://www.theverge.com/gadgets/1035932/apple-macbook-neo-black-friday-2026-deal-sale
+• OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work (TechCrunch) https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/
+• Bare Metal Qwen (Hacker News: Front Page) https://github.com/alesha-pro/llm.asm/tree/main/02-baremetal-os
+• IA recria voz de comentarista morto em 2023 (Tecnoblog) https://tecnoblog.net/noticias/ia-vai-recriar-voz-de-comentarista-morto-em-2023/
+• Black Friday: Amazon e Apple estão entre as marcas mais usadas em golpes (Canaltech) https://canaltech.com.br/seguranca/black-friday-amazon-e-apple-estao-entre-as-marcas-mais-usadas-em-golpes/
+• The best Black Friday deals we’ve already found (The Verge) https://www.theverge.com/gadgets/1028991/black-friday-best-early-deals-2026
+• Anthropic’s Dario Amodei calls accusations of surrendering human control to AI ‘absurd’ (TechCrunch) https://techcrunch.com/2026/11/25/anthropics-dario-amodei-calls-accusations-of-surrendering-human-control-to-ai-absurd/
+
+Impressão 3D e Blender
+• 3D Printing News Briefs, November 26, 2026: Rocket Engine, Filament Donation, &amp; More (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/337568/3d-printing-news-briefs-11-26-2026/
+• 3D Printing Financials: More Double-Digit AM Revenue Growth in Strong Quarter for HP (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/337657/3d-printing-financials-more-double-digit-am-revenue-growth-in-strong-quarter-for-hp/
+• Gobble, Gobble: Thanksgiving-Themed 3D Printed Models for Turkey Day (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/337635/thanksgiving-themed-3d-printed-models/
+• Tiny 3D Printed Particles Could Change How Materials Are Made (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/337603/tiny-3d-printed-particles-could-change-how-materials-are-made/
+• UC Davis Scientist’s Personal Mission to Give Cancer Patients More Time with Bioprinting (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/337618/uc-davis-researchers-3d-print-mini-tumors-to-help-guide-cancer-treatment/
+
+Economia e investimentos
+• XP Educação lança pré-MBA que ensina gestores a usar IA na análise de dados (InfoMoney) https://www.infomoney.com.br/carreira/xp-educacao-pre-mba-ia-analise-dados/
+• Reforma tributária: sem benefícios a produtos e setores, imposto do governo cairia de 11,3% para 7% em 2027, estima órgão do Senado (g1 &gt; Economia) https://g1.globo.com/economia/noticia/2026/11/26/reforma-tributaria-sem-beneficios-a-produtos-e-setores-imposto-do-governo-cairia-de-113percent-para-7percent-em-2027-estima-orgao-do-senado.ghtml
+• Macron diz que carne brasileira é 'dopada' e gera revolta de representantes do agro (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://c-level.folha.uol.com.br/agro/2026/11/macron-diz-que-carne-e-dopada-e-gera-revolta-de-representantes-do-agro.shtml
+• Nenhuma ação em queda no Ibovespa: os dois motivos por trás da festa de hoje (Money Times) https://www.moneytimes.com.br/nenhuma-acao-em-queda-no-ibovespa-os-dois-motivos-por-tras-da-festa-de-hoje-bdap/
+• Lula recebe Cleitinho para discutir renegociação da dívida de MG com a União (InfoMoney) https://www.infomoney.com.br/politica/lula-recebe-cleitinho-para-discutir-renegociacao-da-divida-de-mg-com-a-uniao/
+• Black Friday: celulares lideram descontos no PIX entre produtos monitorados pelo g1; veja lista (g1 &gt; Economia) https://g1.globo.com/guia/guia-de-compras/black-friday-celulares-lideram-descontos-no-pix-entre-produtos-monitorados-pelo-g1-veja-lista.ghtml
+• Quênia se torna destino de componentes solares chineses e amplia exportações aos EUA (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://c-level.folha.uol.com.br/economia-sustentavel/2026/11/quenia-se-torna-destino-de-componentes-solares-chineses-e-amplia-exportacoes-aos-eua.shtml
+• CEO da JBS (JBSS32) espera retomada de vendas de frango do Brasil à UE em dezembro (Money Times) https://www.moneytimes.com.br/ceo-da-jbs-jbss32-espera-retomada-de-vendas-de-frango-do-brasil-a-ue-em-dezembro-pads/
+• Famoso píer na Califórnia é destruído por ondas gigantes provocadas pelo El Niño (InfoMoney) https://www.infomoney.com.br/mundo/famoso-pier-na-california-e-destruido-por-ondas-gigantes-provocadas-pelo-el-nino/
+• Governo dá 10 dias para que Google amplie informações sobre anúncios e fixa multa de R$ 200 mil em caso de descumprimento (g1 &gt; Economia) https://g1.globo.com/economia/noticia/2026/11/26/governo-da-10-dias-para-que-google-amplie-informacoes-sobre-anuncios-e-fixa-multa-diaria-de-r-200-mil-em-caso-de-descumprimento.ghtml
+• Dubai fecha acordo para criar gigante de US$ 159 bilhões em banco islâmico (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://c-level.folha.uol.com.br/negocios/2026/11/dubai-fecha-acordo-para-criar-gigante-de-us-159-bilhoes-em-banco-islamico.shtml
+• Dos EUA, Flávio Bolsonaro lista R$ 79,3 milhões em emendas para o Orçamento de 2027 (Money Times) https://www.moneytimes.com.br/dos-eua-flavio-bolsonaro-lista-r-793-milhoes-em-emendas-para-o-orcamento-de-2027-mlem/
+• Trump exige investigação sobre dados do PIB divulgados antes de midterms (InfoMoney) https://www.infomoney.com.br/economia/trump-exige-investigacao-sobre-dados-do-pib-divulgados-antes-de-midterms/
+• 'Carne dopada': exportadores brasileiros rebatem fala de Macron: 'grave e inaceitável um chefe de Estado recorrer a inverdades' (g1 &gt; Economia) https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/exportadores-de-carne-rebatem-fala-de-macron.ghtml
+• Alíquota da CBS na reforma tributária cairia pela metade com novo cálculo e sem exceções (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://www1.folha.uol.com.br/mercado/2026/11/aliquota-da-cbs-na-reforma-tributaria-cairia-pela-metade-com-novo-calculo-e-sem-excecoes.shtml
+
+Rio de Janeiro e Brasil
+• Água amarelada e com sujeira saem das torneiras no litoral de SP: 'Foi o ápice' (g1) https://g1.globo.com/sp/santos-regiao/noticia/2026/11/26/agua-amarelada-e-com-sujeira-saem-das-torneiras-no-litoral-de-sp-foi-o-apice.ghtml
+• Polícia do Rio prende mais dois envolvidos em agressões a professor (Feed Últimas) https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-11/policia-do-rio-prende-mais-dois-envolvidos-em-agressoes-professor
+• Espanha avalia risco ambiental após navio-tanque com 7 mil toneladas de diesel virar perto de Ibiza (BBC Brasil) https://www.bbc.com/portuguese/articles/c60ev94d02jlo?at_medium=RSS&amp;at_campaign=rss
+• Radialista é suspeito de estupro de vulnerável em Afogados da Ingazeira (g1) https://g1.globo.com/pe/caruaru-regiao/noticia/2026/11/26/radialista-e-suspeito-de-estupro-de-vulneravel-em-afogados-da-ingazeira.ghtml
+• Trivia Trens retoma operação das linhas 11- Coral e 12-Safira (Feed Últimas) https://agenciabrasil.ebc.com.br/geral/noticia/2026-11/trivia-trens-retoma-operacao-das-linhas-11-coral-e-12-safira
+• Em áudio | Como novos vírus criados por IA podem mudar a ciência (apesar de causarem preocupação) (BBC Brasil) https://www.bbc.com/portuguese/listen/cwvg20pgg394o?at_medium=RSS&amp;at_campaign=rss
+• Incêndio atinge área de preservação ambiental em Boa Vista (g1) https://g1.globo.com/rr/roraima/noticia/2026/11/26/incendio-atinge-area-de-preservacao-ambiental-em-boa-vista.ghtml
+• Festival de Música Rádio Nacional celebra 90 anos da emissora com show (Feed Últimas) https://agenciabrasil.ebc.com.br/cultura/noticia/2026-11/festival-de-musica-radio-nacional-celebra-90-anos-da-emissora-com-show
+• Por que o Brasil vive surto de mpox? O que se sabe — e o que não se sabe — sobre os novos casos da doença (BBC Brasil) https://www.bbc.com/portuguese/articles/cq70269ke8l4o?at_medium=RSS&amp;at_campaign=rss
+• Acusado de assassinar adolescente com 11 facadas pega mais de 36 anos de prisão no Acre (g1) https://g1.globo.com/ac/acre/noticia/2026/11/26/acusado-de-assassinar-adolescente-a-facadas-pega-mais-de-36-anos-de-prisao-no-acre.ghtml
+• Seca na Amazônia: governo estuda auxílio emergencial para pescadores (Feed Últimas) https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/seca-na-amazonia-governo-estuda-auxilio-emergencial-para-pescadores
+• Menos sexo, mais pornografia: o que pesquisa revela sobre jovens britânicos (BBC Brasil) https://www.bbc.com/portuguese/articles/cmzxvew7yl0qo?at_medium=RSS&amp;at_campaign=rss
+• Moradores protestam contra falta d'água em residencial no Benedito Bentes, em Maceió (g1) https://g1.globo.com/al/alagoas/noticia/2026/11/26/moradores-protestam-contra-falta-dagua-em-residencial-no-benedito-bentes-em-maceio.ghtml
+• Jogador do Vasco é preso por suspeita de tentativa de homicídio (Feed Últimas) https://agenciabrasil.ebc.com.br/justica/noticia/2026-11/jogador-do-vasco-e-preso-por-suspeita-de-tentativa-de-homicidio
+• Como campanha de Lula inspirou até a direita na eleição da Espanha — e as críticas ao presidente por se envolver na disputa (BBC Brasil) https://www.bbc.com/portuguese/articles/cv0l341l4yd1o?at_medium=RSS&amp;at_campaign=rss</description>
+      <pubDate>Thu, 26 Nov 2026 14:51:59 -0300</pubDate>
+      <guid isPermaLink="false">leo-2xk0na98-20261126</guid>
+      <enclosure url="https://lvmasterrj.github.io/Mynews/leo-2xk0na98/ep-2026-11-26.mp3" length="13133900" type="audio/mpeg" />
+      <itunes:duration>00:36:28</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+    <item>
+      <title>Quarta-feira, 25/11/2026</title>
+      <description>Desenvolvimento web
+• All Sandbox runtimes now use Vercel Managed Images (Vercel News) https://vercel.com/changelog/all-sandbox-runtimes-now-use-vercel-managed-images
+• Using Fallbacks for a Robust Front-End (CSS-Tricks) https://css-tricks.com/using-frontend-fallbacks/
+• AWS PrivateLink endpoints are now available on Secure Compute (Vercel News) https://vercel.com/changelog/aws-privatelink-endpoints-are-now-available-on-secure-compute
+• Dev Material Archive (CSS-Tricks) https://css-tricks.com/dev-material-archive/
+• Flags SDK now works on Vercel without FLAGS_SECRET (Vercel News) https://vercel.com/changelog/flags-sdk-now-works-on-vercel-without-flags-secret
+
+Tecnologia e inteligência artificial
+• Launch HN: Versine (YC F26) – MCP to send and receive money (Hacker News: Front Page) https://news.ycombinator.com/item?id=50634426
+• É difícil imaginar que humanidade manterá o controle, diz Meta sobre IA (Tecnoblog) https://tecnoblog.net/noticias/e-dificil-imaginar-que-humanidade-mantera-o-controle-diz-meta-sobre-ia/
+• Claude, ChatGPT e Gemini vão ficar mais baratos na Black Friday? (Canaltech) https://canaltech.com.br/mercado/claude-chatgpt-e-gemini-vao-ficar-mais-baratos-na-black-friday/
+• Microsoft declares ‘Code Red’ after huge Outlook outage (The Verge) https://www.theverge.com/news/1042025/microsoft-code-red-outlook-outage
+• Anthropic shares fall below IPO price, a worrying sign for AI startups (TechCrunch) https://techcrunch.com/2026/11/24/anthropic-shares-fall-below-ipo-price-a-worrying-sign-for-ai-startups/
+• Top open problems in mathematics ranked by LLM-assessed importance (Hacker News: Front Page) https://www.proofatlas.ai/open-problems/
+
+Impressão 3D e Blender
+• Bambu Lab and Tsinghua University Team Up on Interactive 3D Printing (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/337503/bambu-lab-and-tsinghua-university-team-up-on-interactive-3d-printing/
+• Additive Services Are Flourishing, Powder Bed Fusion Leads Growth in North America (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/337505/additive-services-are-flourishing-services-for-powder-bed-fusion-are-growing-the-most-in-north-america/
+• How Electroninks and IDS Are Moving 3D Printed Electronics into Production (3DPrint.com | Additive Manufacturing Business) https://3dprint.com/336624/how-electroninks-and-integrated-deposition-solutions-are-moving-3d-printed-electronics-into-production/
+
+Economia e investimentos
+• Deputado cobra gastos de festa de posse de Lula que pode ter Bad Bunny e Roger Waters (InfoMoney) https://www.infomoney.com.br/politica/deputado-cobra-gastos-de-festa-de-posse-de-lula-que-pode-ter-bad-bunny-e-roger-waters/
+• Prêmio Médias de Valor 2026 reconhece 20 empresas que se destacam em gestão e resultados (g1 &gt; Economia) https://g1.globo.com/empreendedorismo/noticia/2026/11/25/premio-medias-de-valor-2026-reconhece-20-empresas-que-se-destacam-em-gestao-e-resultados.ghtml
+• Retorno de Huang à Nvidia traz à tona debate sobre IA de código aberto (Folha de S.Paulo - Mercado - Principal) https://redir.folha.com.br/redir/online/mercado/rss091/*https://c-level.folha.uol.com.br/ia/2026/11/retorno-de-huang-a-nvidia-traz-a-tona-debate-sobre-ia-de-codigo-aberto.shtml
+• Braskem (BRKM5): Justiça mantém suspensão de ações e execuções por 120 dias (Money Times) https://www.moneytimes.com.br/braskem-brkm5-justica-mantem-suspensao-de-acoes-e-execucoes-por-120-dias/
+• Suzano (SUZB3) sobe 30% em meio à queda do Ibovespa; ainda há espaço para alta? (InfoMoney) https://www.infomoney.com.br/mercados/suzano-suzb3-sobe-30-em-meio-queda-do-ibovespa-ainda-ha-espaco-para-alta/
+• Dólar abre em alta e vai a R$ 5,97, com foco em inflação e PIB dos EUA e medidas econômicas de Lula (g1 &gt; Economia) https://g1.globo.com/economia/noticia/2026/11/25/dolar-ibovespa.ghtml
+
+Rio de Janeiro e Brasil
+• Quatro suspeitos são presos em operação contra facção que coordenava assaltos e se comunicava com presos no RN (g1) https://g1.globo.com/rn/rio-grande-do-norte/noticia/2026/11/25/quatro-suspeitos-sao-presos-em-operacao-contra-faccao-que-coordenava-assaltos-e-se-comunicava-com-presos-no-rn.ghtml
+• Estoque do Hemorio atende emergência em mais de 100 hospitais públicos (Feed Últimas) https://agenciabrasil.ebc.com.br/saude/noticia/2026-11/estoque-do-hemorio-atende-emergencia-em-mais-de-100-hospitais-publicos
+• A iraniana acusada de 'declarar guerra a Deus' após denunciar morte da filha (BBC Brasil) https://www.bbc.com/portuguese/articles/c94gnk80med2o?at_medium=RSS&amp;at_campaign=rss
+• Bebê que morreu soterrado com a mãe em Monte Alegre do Sul completou 1 ano um dia antes (g1) https://g1.globo.com/sp/campinas-regiao/noticia/2026/11/25/bebe-que-morreu-soterrado-com-a-mae-em-monte-alegre-do-sul-completou-1-ano-um-dia-antes.ghtml
+• Representantes de sedes da Copa Feminina garantem campos híbridos (Feed Últimas) https://agenciabrasil.ebc.com.br/esportes/noticia/2026-11/representantes-de-sedes-da-copa-feminina-garantem-campos-hibridos
+• O 'modelo Bukele' pode acabar com as gangues do Haiti? (BBC Brasil) https://www.bbc.com/portuguese/watch/ck0jx47477g6o?at_medium=RSS&amp;at_campaign=rss</description>
+      <pubDate>Wed, 25 Nov 2026 09:37:12 -0300</pubDate>
+      <guid isPermaLink="false">leo-2xk0na98-20261125</guid>
+      <enclosure url="https://lvmasterrj.github.io/Mynews/leo-2xk0na98/ep-2026-11-25.mp3" length="8815196" type="audio/mpeg" />
+      <itunes:duration>00:24:29</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+  </channel>
+</rss>
